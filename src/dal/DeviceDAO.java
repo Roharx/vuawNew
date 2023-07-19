@@ -19,7 +19,6 @@ public class DeviceDAO implements IDeviceDAO {
             throw new RuntimeException(e);
         }
     }
-//git test
 
     @Override
     public List<Device> getAllDevicesForProject(String refNumber) {
