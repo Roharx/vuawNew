@@ -1,7 +1,6 @@
 package dal;
 
 import bll.be.Device;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.connector.MSSQLConnector;
 import dal.interfaces.IDeviceDAO;
 import dal.mapper.DeviceMapper;
@@ -96,16 +95,58 @@ public class DeviceDAO implements IDeviceDAO {
 
     @Override
     public Boolean createDevice(Device device) {
-        return null;
+        try {
+            Connection conn = mssqlConnector.createConnection();
+            String sql = "INSERT INTO Devices (id, name, uName, uPassword, refNumber) VALUES (?,?,?,?,?)";
+
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, device.getId());
+            preparedStatement.setString(2, device.getName());
+            preparedStatement.setString(3, device.getUsername());
+            preparedStatement.setString(4, device.getPassword());
+            preparedStatement.setString(5, device.getRefNumber());
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     @Override
     public Boolean updateDevice(Device device) {
-        return null;
+        try {
+            Connection conn = mssqlConnector.createConnection();
+            String sql = "UPDATE Devices SET name=?, uName=?, uPassword=?, refNumber=? WHERE id=?";
+
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, device.getName());
+            preparedStatement.setString(2, device.getUsername());
+            preparedStatement.setString(3, device.getPassword());
+            preparedStatement.setString(4, device.getRefNumber());
+            preparedStatement.setInt(5, device.getId());
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     @Override
     public Boolean removeDevice(int id) {
-        return null;
+        try {
+            Connection conn = mssqlConnector.createConnection();
+            String sql = "DELETE FROM Devices WHERE id=?";
+
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 }
