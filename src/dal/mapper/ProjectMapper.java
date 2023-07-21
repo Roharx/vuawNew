@@ -27,11 +27,11 @@ public class ProjectMapper {
         Boolean includePictures = rs.getBoolean("includePictures");
         Boolean includeDrawing = rs.getBoolean("includeDrawing");
 
-        this.project = new Project(refNumber,name,email,location,note,drawing,creationDate,startDate,endDate,approved,
-                privateProject,includePictures,includeDrawing);
+        this.project = new Project(refNumber, name, email, location, note, drawing, creationDate, startDate, endDate, approved,
+                privateProject, includePictures, includeDrawing);
     }
 
-    public Project getProject(){
+    public Project getProject() {
         return this.project;
     }
 }
