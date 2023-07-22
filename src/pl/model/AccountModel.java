@@ -3,16 +3,19 @@ package pl.model;
 import bll.be.Account;
 import bll.manager.AccountManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountModel {
     //TODO methods: logged in user, etc.
-    private Account loggedInAccount;
-    private AccountManager accountManager;
+    private Account loggedInAccount = null;
+    private AccountManager accountManager = new AccountManager();
+    private static AccountModel instance;
 
-    public AccountModel(){
-        accountManager = new AccountManager();
+    private static AccountModel getInstance(){
+        if(instance == null){
+            instance = new AccountModel();
+        }
+        return instance;
     }
 
     public List<Account> getAllAccounts(){
@@ -32,5 +35,8 @@ public class AccountModel {
     }
     public Boolean updateAccount(Account account){
         return accountManager.updateAccount(account);
+    }
+    public Boolean login(String username, String password){
+        return null;
     }
 }

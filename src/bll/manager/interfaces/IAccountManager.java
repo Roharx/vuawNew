@@ -11,4 +11,5 @@ public interface IAccountManager {
     Boolean createAccount(Account account);
     Boolean removeAccount(int id);
     Boolean updateAccount(Account account);
+    Boolean login(String username, String password);
 }
